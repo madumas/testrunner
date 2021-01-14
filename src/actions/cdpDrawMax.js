@@ -1,4 +1,4 @@
-import { ETH, MDAI } from '@makerdao/dai-plugin-mcd';
+import { ETH, DAI } from '@makerdao/dai-plugin-mcd';
 export default {
   before: () => {},
   operation: async (user, { maker }) => {
@@ -17,7 +17,7 @@ export default {
     const ilkInfo = await cdp.type.ilkInfo();
     const amount = cdp.isSafe
       ? cdp.daiAvailable.shiftedBy(27).div(ilkInfo.rate)
-      : MDAI(0);
+      : DAI(0);
 
     //Use frob directly to avoid a drip()
     await manager.proxyActions.frob(

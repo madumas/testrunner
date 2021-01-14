@@ -1,4 +1,4 @@
-import { ETH, MDAI } from '@makerdao/dai-plugin-mcd';
+import { ETH, DAI } from '@makerdao/dai-plugin-mcd';
 
 export default {
   // before and after can be omitted, but remain
@@ -6,14 +6,14 @@ export default {
   before: (_, { config }) => {
     config.ilk = config && config.ilk ? config.ilk : 'ETH-A';
     config.collateral =
-      config && config.collateral ? config.collateral : ETH(1);
-    config.dai = config && config.dai ? config.dai : 20;
+      config && config.collateral ? config.collateral : ETH(2);
+    config.dai = config && config.dai ? config.dai : 100;
     return true;
   },
   operation: (user, { maker, config }) => {
     return maker
       .service('mcd:cdpManager')
-      .openLockAndDraw(config.ilk, config.collateral, MDAI(config.dai));
+      .openLockAndDraw(config.ilk, config.collateral, DAI(config.dai));
   },
   after: () => {},
   category: 'cdp'

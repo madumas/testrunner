@@ -1,4 +1,4 @@
-import { ETH, MDAI } from '@makerdao/dai-plugin-mcd';
+import { ETH, DAI } from '@makerdao/dai-plugin-mcd';
 
 export default {
   precondition: async (user, { maker, config }) => {
@@ -22,7 +22,7 @@ export default {
     //open CDP
     const cdp = await maker
       .service('mcd:cdpManager')
-      .openLockAndDraw(config.ilk, config.collateral, MDAI(20));
+      .openLockAndDraw(config.ilk, config.collateral, DAI(20));
     cdp.reset();
     cdp.type.reset();
     await cdp.prefetch();
@@ -31,7 +31,7 @@ export default {
     const ilkInfo = await cdp.type.ilkInfo();
     const amount = cdp.isSafe
       ? cdp.daiAvailable.shiftedBy(27).div(ilkInfo.rate)
-      : MDAI(0);
+      : DAI(0);
 
     const method = 'frob';
     const args = [

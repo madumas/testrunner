@@ -1,4 +1,4 @@
-import { ETH, MDAI } from '@makerdao/dai-plugin-mcd';
+import { ETH, DAI } from '@makerdao/dai-plugin-mcd';
 
 export default {
   operation: async (user, { maker }) => {
@@ -8,7 +8,7 @@ export default {
 
     await maker
       .service('mcd:cdpManager')
-      .lockAndDraw(cdp.id, cdp.ilk, ETH(0), MDAI(50));
+      .lockAndDraw(cdp.id, cdp.ilk, ETH(0), DAI(50));
 
     return cdp;
   },

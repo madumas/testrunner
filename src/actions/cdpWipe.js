@@ -1,4 +1,4 @@
-import { MDAI } from '@makerdao/dai-plugin-mcd';
+import { DAI } from '@makerdao/dai-plugin-mcd';
 
 export default {
   operation: async (user, { maker }) => {
@@ -6,7 +6,7 @@ export default {
     const cdpIds = await maker.service('mcd:cdpManager').getCdpIds(proxy, true);
     const cdp = await maker.service('mcd:cdpManager').getCdp(cdpIds[0].id);
 
-    const dai = maker.getToken(MDAI);
+    const dai = maker.getToken(DAI);
     await dai.approveUnlimited(proxy);
 
     await cdp.wipeDai(50);

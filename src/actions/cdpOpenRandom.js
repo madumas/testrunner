@@ -1,4 +1,4 @@
-import { ETH, MDAI } from '@makerdao/dai-plugin-mcd';
+import { ETH, DAI } from '@makerdao/dai-plugin-mcd';
 
 export default {
   before: (_, { config, rng }) => {
@@ -11,7 +11,7 @@ export default {
     //open CDP
     const cdp = await maker
       .service('mcd:cdpManager')
-      .openLockAndDraw(config.ilk, config.collateral, MDAI(config.dai));
+      .openLockAndDraw(config.ilk, config.collateral, DAI(config.dai));
 
     const urn = await cdp.getUrn();
 
